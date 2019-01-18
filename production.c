@@ -25,6 +25,7 @@ bool production(int argc, char* argv[])
 {
 	bool results = false;
 	bool done = false;
+	int firstDay = -1; //the day of the week of the first day of the month, 0-6, initialized to -1
 
 	//get the year, Usage as needed.
 	int year = -1;
@@ -104,14 +105,125 @@ bool production(int argc, char* argv[])
 			//for loop to loop through each day of given month and print it properly formatted
 			for (int day = 1; day <= calculate_days_in_month(year,month);day++){
 
-				if (day/10 == 0){ //if the day has one digit, print two spaces before it
-					printf("  %d  ",day);
-				}
-				else{ //if the day has more than one digit (2 digits), print only one space before it
-					printf(" %d  ",day);
+				if (day == 1){
+					firstDay = calculate_day_of_week(day, month, year);
+					//switch to start the first day in the correct area of calendar
+					switch (firstDay){
+
+						case 0:
+							printf("  %d  ", day);
+							break;
+						case 1:
+							printf("       %d  ", day);
+							break;
+						case 2:
+							printf("            %d  ", day);
+							break;
+						case 3:
+							printf("                 %d  ", day);
+							break;
+						case 4:
+							printf("                      %d  ", day);
+							break;
+						case 5:
+							printf("                           %d  ", day);
+							break;
+						case 6:
+							printf("                                %d  ", day);
+							break;
+						default:
+							printf("Invalid week bound hit.");
+					}
 				}
 
-				if (day % 7 == 0 || day == calculate_days_in_month(year,month)){
+
+				//Only print day if day is not 1, and therefore printed above
+				if (day != 1){
+					if (day/10 == 0){ //if the day has one digit, print two spaces before it
+							printf("  %d  ",day);
+						}
+					else{ //if the day has more than one digit (2 digits), print only one space before it
+							printf(" %d  ",day);
+						}
+				}
+
+
+				//switch on the first day to determine where the new lines should be inserted,
+				//dependent on what day of the week the first day of the month falls on
+				//inserts a new line at the end of the first week and every 7 days after that
+				switch(firstDay){
+				//First day is a Sunday, newline after 7 days
+				case 0:
+					if (day == 7){
+						printf("\n");
+					}
+					else if (day % 7 == 0){
+						printf("\n");
+					}
+					break;
+				//First day is a Monday, newline after 6 days
+				case 1:
+					if (day == 6){
+						printf("\n");
+					}
+					else if ((day + 1) % 7 == 0){
+						printf("\n");
+					}
+					break;
+				//First day is a Tuesday, newline after 5 days
+				case 2:
+					if (day == 5){
+						printf("\n");
+					}
+					else if ((day + 2) % 7 == 0){
+						printf("\n");
+					}
+					break;
+				//First day is a Wednesday, newline after 4 days
+				case 3:
+					if (day == 4){
+						printf("\n");
+					}
+					else if ((day + 3) % 7 == 0){
+						printf("\n");
+					}
+					break;
+				//First day is a Thursday, newline after 3 days
+				case 4:
+					if (day == 3){
+						printf("\n");
+					}
+					else if ((day + 4) % 7 == 0){
+						printf("\n");
+					}
+					break;
+				//First day is a Friday, newline after 2 days
+				case 5:
+					if (day == 2){
+						printf("\n");
+					}
+					else if ((day + 5) % 7 == 0){
+						printf("\n");
+					}
+					break;
+				//First day is a Saturday, newline after 1 day
+				case 6:
+					if (day == 1){
+						printf("\n");
+					}
+					else if ((day + 6) % 7 == 0){
+						printf("\n");
+					}
+					break;
+				//If you hit the default case, you have screwed up spectacularly
+				//double-check the calculate_day_of_week function
+				default:
+					printf("You done goofed again, mister\n");
+				}
+
+
+				//gives a newline if it is the end of the month
+				if (day == calculate_days_in_month(year,month)){
 					printf("\n");
 				}
 

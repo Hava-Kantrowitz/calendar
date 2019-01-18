@@ -20,6 +20,7 @@
  *         false if User entered bad input.
  */
 
+#define YEAR_LENGTH 11 //Constant for number of months in year
 bool production(int argc, char* argv[])
 {
 	bool results = false;
@@ -28,32 +29,37 @@ bool production(int argc, char* argv[])
 	//get the year, Usage as needed.
 	int year = -1;
 	puts("CALENDAR");
+	//If there is no value on the command line, prompt user to add a year and scan it in
 	if(argc<2)
 	{
 		puts("Enter a year");
 		scanf("%d",&year);
+		//If the user provides an invalid year, let user know and end production code
 		if(year<1752)
 		{
 			printf("Usage: Year should be greater than 1751, received %d.\n",year);
 			done = true;
 		}
 	}
+	//Else take the value on command line and use it in program
 	else
 	{
 		char* ptr=0;
 		long year_l = strtol(argv[1],&ptr,10);
 		year = (int)year_l;
+		//If value is an invalid year, let user know and end production code
 		if(year<1752)
 		{
 			printf("Usage: Year should be greater than 1751, received %d.\n",year);
 			done = true;
 		}
 	}
+	//If production code hasn't ended, print out the calendar
 	if(!done)
 	{
-
-		for (int month = 0; month <= 11; month++){
-			switch(month){
+		//Loop goes through each month, printing out month name, week header, and days of week
+		for (int month = 0; month <= YEAR_LENGTH; month++){
+			switch(month){//Switch is used to print out full name of each month
 			case 0:
 				printf("January\n");
 				break;
@@ -90,17 +96,18 @@ bool production(int argc, char* argv[])
 			case 11:
 				printf("December\n");
 				break;
-			default:
+			default://If the default case is hit, an out-of-bounds month was given as input
 				printf("You done goofed somewhere\n");
 				done = true;
 			}
-			printf("Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");
+			printf("Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");//week header, must be printed once a month
+			//for loop to loop through each day of given month and print it properly formatted
 			for (int day = 1; day <= calculate_days_in_month(year,month);day++){
 
-				if (day/10 == 0){
+				if (day/10 == 0){ //if the day has one digit, print two spaces before it
 					printf("  %d  ",day);
 				}
-				else{
+				else{ //if the day has more than one digit (2 digits), print only one space before it
 					printf(" %d  ",day);
 				}
 
@@ -115,6 +122,7 @@ bool production(int argc, char* argv[])
 
 
 	}
+	//If production code hasn't ended, change results to true
 	if(!done)
 	{
 		results=true;
@@ -130,13 +138,15 @@ bool production(int argc, char* argv[])
  */
 int calculate_days_in_month(int year, int month)
 {
-	int answer = -3;
+	int answer = -3; //the number of days in the month, initialized to an invalid output
 	bool done = false;
 
-	if (year < 1752){
+	if (year < 1752){ //if year is less than 1752, return -1 for invalid input
 		answer = -1;
 	}
 	else {
+		//if year is valid (> 1752), go into switch on month whic provides the number of days in
+		//the month
 		switch(month){
 
 		case 0:
@@ -144,10 +154,11 @@ int calculate_days_in_month(int year, int month)
 			break;
 
 		case 1:
+			//if the year is a leap year, Feb has 29 days
 			if (is_leap_year(year)){
 				answer = 29;
 			}
-			else {
+			else {//else it has 28 days
 				answer = 28;
 			}
 			break;
@@ -192,13 +203,13 @@ int calculate_days_in_month(int year, int month)
 			answer = 31;
 			break;
 
-		default:
+		default://default is hit for invalid input, puts answer as -1
 			answer = -1;
 			break;
 		}
 	}
 
-	return(answer);
+	return(answer);//return the number of days in the month
 }
 /** Test if a given year is a leap year or not.
  * @param year The year we are testing
@@ -212,23 +223,23 @@ int is_leap_year(int year)
 	bool done = false;
 	int ans = -2; //Start with an invalid answer
 
-	if (year < 1752){
+	if (year < 1752){//If year is less than 1752 (invalid), answer is -1
 		ans = -1;
 	}
-	else if (year % 100 == 0 && year % 400 == 0){
+	else if (year % 100 == 0 && year % 400 == 0){//if the year is divisible by 100 and 400, it's leap year
 		ans = 1;
 	}
-	else if (year % 100 == 0){
+	else if (year % 100 == 0){//if the year is only divisible by 100 (NOT 400), it's NOT a leap year
 		ans = 0;
 	}
-	else if (year % 4 == 0){
+	else if (year % 4 == 0){//if year is divisible by 4 (but NOT 100), it's a leap year
 		ans = 1;
 	}
-	else {
+	else {//any other case, it's NOT a leap year
 		ans = 0;
 	}
 
-	return ans;
+	return ans;//return whether (1) or not (0) the given year is a leap year, -1 if invalid year
 
 }
 /** Determines what day of the week a particular date falls on.
@@ -244,21 +255,24 @@ int calculate_day_of_week(int day, //first day of month is 1
 		int month, //uses 0 for January
 		int year)
 {//invalid input gets a -1 answer
-	int ans = -1;
+	int ans = -1;//start with invalid value
 	bool done = false;
 
-	int lastTwoDigits = year % 100;
-	int firstTwoDigits = year / 100;
-	int shiftedMonth = 0;
-	double part1A;
-	int part1 = 0;
-	double part2A = 0;
-	int part2 = 0;
-	double part3A = 0;
-	int part3 = 0;
-	int part4 = 0;
-	int week = 0;
+	int lastTwoDigits = year % 100;//the last two digits of the given year
+	int firstTwoDigits = year / 100;//the first two digits of the given year
+	int shiftedMonth = 0;//the shifted month needed for the week equation, initialized to 0
+	double part1A = 0;//First calculated section of week equation, initialized to 0
+	int part1 = 0;//Floor of part1A, initialized to 0
+	double part2A = 0;//Second calculated section of week equation, initialized to 0
+	int part2 = 0;//Floor of part2A, initialized to 0
+	double part3A = 0;//Third calculated section of week equation, initialized to 0
+	int part3 = 0;//Floor of part3A, initialized to 0
+	int part4 = 0;//Fourth calculated section of week equation, initialized to 0
+	int week = 0;//The week value before taking the mod of 7, initialized to 0
 
+	//switch to change any given month to the shifted month used in week equation
+	//For cases 0 and 1 (Jan and Feb), 1 is subtracted from the last two digits of the year
+	//as per week equation
 	switch(month){
 
 	case 0:
@@ -311,16 +325,19 @@ int calculate_day_of_week(int day, //first day of month is 1
 		shiftedMonth = 10;
 		break;
 
-	default:
-		shiftedMonth = -1;
+	default://Hits when month is an invalid value, returns the invalid marker immediately;
+		ans = -1;
 		return ans;
 	}
 
+	//If the year or day are invalid, immediately return the invalid answer
 	if (year < 1752 || day < 1 || day > 31){
+		ans = -1;
 		return ans;
 	}
 	else {
 
+		//calculate each part of the week equation
 		part1A = (2.6*shiftedMonth)-0.2;
 		part1 = floor(part1A);
 		part2A = lastTwoDigits/4;
@@ -332,11 +349,12 @@ int calculate_day_of_week(int day, //first day of month is 1
 		week = day + part1 + lastTwoDigits + part2 + part3 - part4;
 		ans = week % 7;
 
+		//if the answer is negative, add 7 to it
 		if (ans < 0){
 			ans = ans + 7;
 		}
 
-		//Offset by 6 for the year 2000
+		//If the year is 2000, offset it by 6
 		if (year == 2000){
 			ans = ans + 6;
 		}

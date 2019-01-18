@@ -55,7 +55,6 @@ bool production(int argc, char* argv[])
 			done = true;
 		}
 	}
-	puts("CALENDAR");
 	//If production code hasn't ended, print out the calendar
 	if(!done)
 	{
@@ -131,22 +130,11 @@ bool production(int argc, char* argv[])
 							printf("                           %d  ", day);
 							break;
 						case 6:
-							printf("                                %d  ", day);
+							printf("                              ");
 							break;
 						default:
 							printf("Invalid week bound hit.");
 					}
-				}
-
-
-				//Only print day if day is not 1, and therefore printed above
-				if (day != 1){
-					if (day/10 == 0){ //if the day has one digit, print two spaces before it
-							printf("  %d  ",day);
-						}
-					else{ //if the day has more than one digit (2 digits), print only one space before it
-							printf(" %d  ",day);
-						}
 				}
 
 
@@ -157,64 +145,128 @@ bool production(int argc, char* argv[])
 				//First day is a Sunday, newline after 7 days
 				case 0:
 					if (day == 7){
-						printf("\n");
+						printf("  %d\n",day);
 					}
 					else if (day % 7 == 0){
-						printf("\n");
+						printf(" %d\n",day);
+					}
+					else if (day != 1){
+						if (day/10 == 0){ //if the day has one digit, print two spaces before it
+								printf("  %d  ",day);
+							}
+						else{ //if the day has more than one digit (2 digits), print only one space before it
+								printf(" %d  ",day);
+							}
 					}
 					break;
 				//First day is a Monday, newline after 6 days
 				case 1:
 					if (day == 6){
-						printf("\n");
+						printf("  %d\n",day);
 					}
 					else if ((day + 1) % 7 == 0){
-						printf("\n");
+						printf(" %d\n",day);
+					}
+					else if (day != 1){
+						if (day/10 == 0){ //if the day has one digit, print two spaces before it
+								printf("  %d  ",day);
+							}
+						else{ //if the day has more than one digit (2 digits), print only one space before it
+								printf(" %d  ",day);
+							}
 					}
 					break;
 				//First day is a Tuesday, newline after 5 days
 				case 2:
 					if (day == 5){
-						printf("\n");
+						printf("  %d\n",day);
 					}
 					else if ((day + 2) % 7 == 0){
-						printf("\n");
+						printf(" %d\n",day);
+					}
+					else if (day != 1){
+						if (day/10 == 0){ //if the day has one digit, print two spaces before it
+								printf("  %d  ",day);
+							}
+						else{ //if the day has more than one digit (2 digits), print only one space before it
+								printf(" %d  ",day);
+							}
 					}
 					break;
 				//First day is a Wednesday, newline after 4 days
 				case 3:
 					if (day == 4){
-						printf("\n");
+						printf("  %d\n",day);
 					}
 					else if ((day + 3) % 7 == 0){
-						printf("\n");
+						printf(" %d\n",day);
+					}
+					else if (day != 1){
+						if (day/10 == 0){ //if the day has one digit, print two spaces before it
+								printf("  %d  ",day);
+							}
+						else{ //if the day has more than one digit (2 digits), print only one space before it
+								printf(" %d  ",day);
+							}
 					}
 					break;
 				//First day is a Thursday, newline after 3 days
 				case 4:
 					if (day == 3){
-						printf("\n");
+						printf("  %d\n",day);
 					}
 					else if ((day + 4) % 7 == 0){
-						printf("\n");
+						printf(" %d\n",day);
+					}
+					else if (day != 1){
+						if (day/10 == 0){ //if the day has one digit, print two spaces before it
+								printf("  %d  ",day);
+							}
+						else{ //if the day has more than one digit (2 digits), print only one space before it
+								printf(" %d  ",day);
+							}
 					}
 					break;
 				//First day is a Friday, newline after 2 days
 				case 5:
 					if (day == 2){
-						printf("\n");
+						printf("  %d\n",day);
 					}
 					else if ((day + 5) % 7 == 0){
-						printf("\n");
+						if (day/10 == 0){
+							printf("  %d\n",day);
+						}
+						else {
+							printf(" %d\n",day);
+						}
+
+					}
+					else if (day != 1){
+						if (day/10 == 0){ //if the day has one digit, print two spaces before it
+								printf("  %d  ",day);
+							}
+						else{ //if the day has more than one digit (2 digits), print only one space before it
+								printf(" %d  ",day);
+							}
 					}
 					break;
 				//First day is a Saturday, newline after 1 day
 				case 6:
-					if (day == 1){
-						printf("\n");
+					if ((day + 6) % 7 == 0){
+						if (day/10 == 0){
+							printf("  %d\n",day);
+						}
+						else {
+							printf(" %d\n",day);
+						}
 					}
-					else if ((day + 6) % 7 == 0){
-						printf("\n");
+					else if (day != 1){
+						if (day/10 == 0){ //if the day has one digit, print two spaces before it
+								printf("  %d  ",day);
+							}
+						else{ //if the day has more than one digit (2 digits), print only one space before it
+								printf(" %d  ",day);
+							}
 					}
 					break;
 				//If you hit the default case, you have screwed up spectacularly

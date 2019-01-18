@@ -16,7 +16,7 @@
 
 int main(int argc, char*argv[]) {
 	bool ok=false;// Later will be set true if production runs OK
-	puts("!!!Hello World We're working HW1!!!");
+	//puts("!!!Hello World We're working HW1!!!");
 	//If all tests pass, go into production
 	if(tests())
 	{

@@ -211,7 +211,7 @@ bool testCalcDayOfWeek(void)
 	{
 		//good
 		ok1 = true;
-		puts("2020 works");
+		//puts("2000 works");
 	}
 	bool ok2 = false;
 	//Let's test this year
@@ -243,7 +243,6 @@ bool testCalcDayOfWeek(void)
 	{
 			//good
 			ok5 = true;
-			puts("2052 works");
 	}
 	bool ok6 = false;
 	//Random year test
@@ -251,7 +250,6 @@ bool testCalcDayOfWeek(void)
 	{
 			//good
 			ok6 = true;
-			puts("2020 works");
 	}
 	bool ok7 = false;
 	//test in 3000
@@ -259,7 +257,6 @@ bool testCalcDayOfWeek(void)
 		{
 			//good
 			ok7 = true;
-			puts("3000 works");
 		}
 	bool ok8 = false;
 	//Invalid year

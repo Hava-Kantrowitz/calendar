@@ -29,7 +29,7 @@ bool production(int argc, char* argv[])
 
 	//get the year, Usage as needed.
 	int year = -1;
-	puts("CALENDAR");
+
 	//If there is no value on the command line, prompt user to add a year and scan it in
 	if(argc<2)
 	{
@@ -55,6 +55,7 @@ bool production(int argc, char* argv[])
 			done = true;
 		}
 	}
+	puts("CALENDAR");
 	//If production code hasn't ended, print out the calendar
 	if(!done)
 	{
@@ -101,6 +102,7 @@ bool production(int argc, char* argv[])
 				printf("You done goofed somewhere\n");
 				done = true;
 			}
+
 			printf("Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");//week header, must be printed once a month
 			//for loop to loop through each day of given month and print it properly formatted
 			for (int day = 1; day <= calculate_days_in_month(year,month);day++){
@@ -218,7 +220,7 @@ bool production(int argc, char* argv[])
 				//If you hit the default case, you have screwed up spectacularly
 				//double-check the calculate_day_of_week function
 				default:
-					printf("You done goofed again, mister\n");
+					printf("You done goofed again, mister, day breaking is %d\n", day);
 				}
 
 
@@ -389,12 +391,16 @@ int calculate_day_of_week(int day, //first day of month is 1
 
 	case 0:
 		shiftedMonth = 11;
-		lastTwoDigits--;
+		year--;
+		lastTwoDigits = year % 100;
+		firstTwoDigits = year / 100;
 		break;
 
 	case 1:
 		shiftedMonth = 12;
-		lastTwoDigits--;
+		year--;
+		lastTwoDigits = year % 100;
+		firstTwoDigits = year / 100;
 		break;
 
 	case 2:
@@ -466,10 +472,6 @@ int calculate_day_of_week(int day, //first day of month is 1
 			ans = ans + 7;
 		}
 
-		//If the year is 2000, offset it by 6
-		if (year == 2000){
-			ans = ans + 6;
-		}
 
 	}
 

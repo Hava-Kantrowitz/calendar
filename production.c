@@ -29,6 +29,7 @@ bool production(int argc, char* argv[])
 
 	//get the year, Usage as needed.
 	int year = -1;
+	puts("CALENDAR");
 
 	//If there is no value on the command line, prompt user to add a year and scan it in
 	if(argc<2)

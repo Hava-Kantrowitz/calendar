@@ -8,6 +8,7 @@
 #ifndef PRODUCTION_H_
 #define PRODUCTION_H_
 bool production(int argc, char* argv[]);
+void number_digits(int day);
 int calculate_days_in_month(int year, int month);
 int is_leap_year(int year);
 int calculate_day_of_week(int day, //first day of month is 1

@@ -161,12 +161,7 @@ bool production(int argc, char* argv[])
 					}
 					//All other days not already accounted for
 					else if (day != 1){
-						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-							printf("  %d  ",day);
-						}
-						else{ //if the day has more than one digit (2 digits), print only one space before it
-							printf(" %d  ",day);
-						}
+						number_digits(day);
 					}
 
 					break;
@@ -186,12 +181,7 @@ bool production(int argc, char* argv[])
 					}
 					//All other days not already accounted for
 					else if (day != 1){
-						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-							printf("  %d  ",day);
-						}
-						else{ //if the day has more than one digit (2 digits), print only one space before it
-							printf(" %d  ",day);
-						}
+						number_digits(day);
 					}
 
 					break;
@@ -211,12 +201,7 @@ bool production(int argc, char* argv[])
 					}
 					//All other days not already accounted for
 					else if (day != 1){
-						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-							printf("  %d  ",day);
-						}
-						else{ //if the day has more than one digit (2 digits), print only one space before it
-							printf(" %d  ",day);
-						}
+						number_digits(day);
 					}
 
 					break;
@@ -236,12 +221,7 @@ bool production(int argc, char* argv[])
 					}
 					//All other days not already accounted for
 					else if (day != 1){
-						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-							printf("  %d  ",day);
-						}
-						else{ //if the day has more than one digit (2 digits), print only one space before it
-							printf(" %d  ",day);
-						}
+						number_digits(day);
 					}
 
 					break;
@@ -261,12 +241,7 @@ bool production(int argc, char* argv[])
 					}
 					//All other days not already accounted for
 					else if (day != 1){
-						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-							printf("  %d  ",day);
-						}
-						else{ //if the day has more than one digit (2 digits), print only one space before it
-							printf(" %d  ",day);
-						}
+						number_digits(day);
 					}
 
 					break;
@@ -292,12 +267,7 @@ bool production(int argc, char* argv[])
 					}
 					//All other days not already accounted for
 					else if (day != 1){
-						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-							printf("  %d  ",day);
-						}
-						else{ //if the day has more than one digit (2 digits), print only one space before it
-							printf(" %d  ",day);
-						}
+						number_digits(day);
 					}
 					break;
 				//First day is a Saturday
@@ -317,12 +287,7 @@ bool production(int argc, char* argv[])
 					}
 					//if the day has more than one digit (2 digits), print only one space before it
 					else if (day != 1){
-						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-							printf("  %d  ",day);
-						}
-						else{ //if the day has more than one digit (2 digits), print only one space before it
-							printf(" %d  ",day);
-						}
+						number_digits(day);
 					}
 
 					break;
@@ -343,6 +308,22 @@ bool production(int argc, char* argv[])
 		results=true;
 	}
 	return results;
+}
+/**
+ * Determines and prints out how many spaces should appear before the day
+ * @param day The day we are checking
+ * Prints out the correct number of spaces before the day
+ * 1 space for 2 digits
+ * 2 spaces for 1 digit
+ */
+void number_digits(int day){
+
+	if (day/10 == 0){ //if the day has one digit, print two spaces before it
+		printf("  %d  ",day);
+	}
+	else{ //if the day has more than one digit (2 digits), print only one space before it
+		printf(" %d  ",day);
+	}
 }
 
 /** Calculates how many days are in a given month for a given year.

@@ -20,7 +20,6 @@
  *         false if User entered bad input.
  */
 
-#define YEAR_LENGTH 11 //Constant for number of months in year
 bool production(int argc, char* argv[])
 {
 	bool results = false;
@@ -60,7 +59,8 @@ bool production(int argc, char* argv[])
 	if(!done)
 	{
 		//Loop goes through each month, printing out month name, week header, and days of week
-		for (int month = 0; month <= YEAR_LENGTH; month++){
+		//Terminates after the last month of the year
+		for (int month = 0; month <= 11; month++){
 			switch(month){//Switch is used to print out full name of each month
 			case 0:
 				printf("January\n");
@@ -104,7 +104,9 @@ bool production(int argc, char* argv[])
 			}
 
 			printf("Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");//week header, must be printed once a month
+
 			//for loop to loop through each day of given month and print it properly formatted
+			//Terminates after the last day of each month
 			for (int day = 1; day <= calculate_days_in_month(year,month);day++){
 
 				if (day == 1){
@@ -143,119 +145,142 @@ bool production(int argc, char* argv[])
 				//dependent on what day of the week the first day of the month falls on
 				//inserts a new line at the end of the first week and every 7 days after that
 				switch(firstDay){
-				//First day is a Sunday, newline after 7 days
+				//First day is a Sunday
 				case 0:
+					//First newline printed after 7 days
 					if (day == 7){
 						printf("  %d\n",day);
 					}
+					//If last day of month, newline
 					else if (day == calculate_days_in_month(year,month)){
-																printf(" %d\n", day);
-															}
+						printf(" %d\n", day);
+										}
+					//Newline printed every day divisible by 7
 					else if (day % 7 == 0){
 						printf(" %d\n",day);
 					}
+					//All other days not already accounted for
 					else if (day != 1){
 						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-								printf("  %d  ",day);
-							}
+							printf("  %d  ",day);
+						}
 						else{ //if the day has more than one digit (2 digits), print only one space before it
-								printf(" %d  ",day);
-							}
+							printf(" %d  ",day);
+						}
 					}
 
 					break;
-				//First day is a Monday, newline after 6 days
+				//First day is a Monday
 				case 1:
+					//First newline after 6 days
 					if (day == 6){
 						printf("  %d\n",day);
 					}
+					//Newline after last day of month
 					else if (day == calculate_days_in_month(year,month)){
-																printf(" %d\n", day);
-															}
+						printf(" %d\n", day);
+					}
+					//Newline every day+1 divisible by 7
 					else if ((day + 1) % 7 == 0){
 						printf(" %d\n",day);
 					}
+					//All other days not already accounted for
 					else if (day != 1){
 						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-								printf("  %d  ",day);
-							}
+							printf("  %d  ",day);
+						}
 						else{ //if the day has more than one digit (2 digits), print only one space before it
-								printf(" %d  ",day);
-							}
+							printf(" %d  ",day);
+						}
 					}
 
 					break;
-				//First day is a Tuesday, newline after 5 days
+				//First day is a Tuesday
 				case 2:
+					//First newline after 5 days
 					if (day == 5){
 						printf("  %d\n",day);
 					}
+					//Newline after last day of month
 					else if (day == calculate_days_in_month(year,month)){
-																printf(" %d\n", day);
-															}
+						printf(" %d\n", day);
+					}
+					//Newline every day+2 divisible by 7
 					else if ((day + 2) % 7 == 0){
 						printf(" %d\n",day);
 					}
+					//All other days not already accounted for
 					else if (day != 1){
 						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-								printf("  %d  ",day);
-							}
+							printf("  %d  ",day);
+						}
 						else{ //if the day has more than one digit (2 digits), print only one space before it
-								printf(" %d  ",day);
-							}
+							printf(" %d  ",day);
+						}
 					}
 
 					break;
-				//First day is a Wednesday, newline after 4 days
+				//First day is a Wednesday
 				case 3:
+					//First newline after 4 days
 					if (day == 4){
 						printf("  %d\n",day);
 					}
+					//Newline after last day of month
 					else if (day == calculate_days_in_month(year,month)){
-																printf(" %d\n", day);
-															}
+						printf(" %d\n", day);
+					}
+					//Newline every day+3 divisible by 7
 					else if ((day + 3) % 7 == 0){
 						printf(" %d\n",day);
 					}
+					//All other days not already accounted for
 					else if (day != 1){
 						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-								printf("  %d  ",day);
-							}
+							printf("  %d  ",day);
+						}
 						else{ //if the day has more than one digit (2 digits), print only one space before it
-								printf(" %d  ",day);
-							}
+							printf(" %d  ",day);
+						}
 					}
 
 					break;
-				//First day is a Thursday, newline after 3 days
+				//First day is a Thursday
 				case 4:
+					//First newline after 3rd day
 					if (day == 3){
 						printf("  %d\n",day);
 					}
+					//Newline after last day of month
 					else if (day == calculate_days_in_month(year,month)){
-											printf(" %d\n", day);
-										}
+						printf(" %d\n", day);
+					}
+					//Newline every day+4 divisible by 7
 					else if ((day + 4) % 7 == 0){
 						printf(" %d\n",day);
 					}
+					//All other days not already accounted for
 					else if (day != 1){
 						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-								printf("  %d  ",day);
-							}
+							printf("  %d  ",day);
+						}
 						else{ //if the day has more than one digit (2 digits), print only one space before it
-								printf(" %d  ",day);
-							}
+							printf(" %d  ",day);
+						}
 					}
 
 					break;
-				//First day is a Friday, newline after 2 days
+				//First day is a Friday
 				case 5:
+					//First newline after 2 days
 					if (day == 2){
 						printf("  %d\n",day);
 					}
+					//Newline after last day of month
 					else if (day == calculate_days_in_month(year,month)){
-											printf(" %d\n", day);
-										}
+						printf(" %d\n", day);
+					}
+					//Newline every day+5 divisible by 7
 					else if ((day + 5) % 7 == 0){
 						if (day/10 == 0){
 							printf("  %d\n",day);
@@ -265,35 +290,39 @@ bool production(int argc, char* argv[])
 						}
 
 					}
+					//All other days not already accounted for
 					else if (day != 1){
 						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-								printf("  %d  ",day);
-							}
+							printf("  %d  ",day);
+						}
 						else{ //if the day has more than one digit (2 digits), print only one space before it
-								printf(" %d  ",day);
-							}
+							printf(" %d  ",day);
+						}
 					}
 					break;
-				//First day is a Saturday, newline after 1 day
+				//First day is a Saturday
 				case 6:
+					//Newline every day+6 divisible by 7
 					if ((day + 6) % 7 == 0){
-						if (day/10 == 0){
+						if (day/10 == 0){//if the day has one digit, print two spaces before it
 							printf("  %d\n",day);
 						}
-						else {
+						else {//if the day has more than one digit (2 digits), print only one space before it
 							printf(" %d\n",day);
 						}
 					}
+					//Newline after last day of month
 					else if (day == calculate_days_in_month(year,month)){
-											printf(" %d\n", day);
-										}
+							printf(" %d\n", day);
+					}
+					//if the day has more than one digit (2 digits), print only one space before it
 					else if (day != 1){
 						if (day/10 == 0){ //if the day has one digit, print two spaces before it
-								printf("  %d  ",day);
-							}
+							printf("  %d  ",day);
+						}
 						else{ //if the day has more than one digit (2 digits), print only one space before it
-								printf(" %d  ",day);
-							}
+							printf(" %d  ",day);
+						}
 					}
 
 					break;
@@ -303,13 +332,9 @@ bool production(int argc, char* argv[])
 					printf("You done goofed again, mister, day breaking is %d\n", day);
 				}
 
-
-
 			}
 
 		}
-
-
 
 	}
 	//If production code hasn't ended, change results to true
@@ -335,7 +360,7 @@ int calculate_days_in_month(int year, int month)
 		answer = -1;
 	}
 	else {
-		//if year is valid (> 1752), go into switch on month whic provides the number of days in
+		//if year is valid (> 1752), go into switch on month which provides the number of days in
 		//the month
 		switch(month){
 
@@ -461,7 +486,7 @@ int calculate_day_of_week(int day, //first day of month is 1
 	int week = 0;//The week value before taking the mod of 7, initialized to 0
 
 	//switch to change any given month to the shifted month used in week equation
-	//For cases 0 and 1 (Jan and Feb), 1 is subtracted from the last two digits of the year
+	//For cases 0 and 1 (Jan and Feb), 1 is subtracted from the year
 	//as per week equation
 	switch(month){
 
@@ -520,14 +545,12 @@ int calculate_day_of_week(int day, //first day of month is 1
 		break;
 
 	default://Hits when month is an invalid value, returns the invalid marker immediately;
-		ans = -1;
-		return ans;
+		return -1;
 	}
 
 	//If the year or day are invalid, immediately return the invalid answer
 	if (year < 1752 || day < 1 || day > 31){
-		ans = -1;
-		return ans;
+		return -1;
 	}
 	else {
 
@@ -551,6 +574,6 @@ int calculate_day_of_week(int day, //first day of month is 1
 
 	}
 
-	return ans;
+	return ans;//Return the day of the week, 0 as Sunday - 6 as Saturday
 }
 
